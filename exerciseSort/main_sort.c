@@ -30,8 +30,12 @@ int main(int argc, char** argv) {
   printf("\t\t**** PRINT vetor lido N(%d) **** \n", nlinhas);
   imprimir_vetor(vet, nlinhas);
 
+  // start_time = wtime();
+  // quick_sort(vet, 0, nlinhas - 1);
+  // end_time = wtime();
+
   start_time = wtime();
-  quick_sort(vet, 0, nlinhas - 1);
+  bubblesort(vet, nlinhas - 1);
   end_time = wtime();
 
   printf("\t\t**** PRINT vetor Ordenado N(%d) **** \n", nlinhas);
