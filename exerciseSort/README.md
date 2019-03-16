@@ -14,14 +14,14 @@ Para compilar o arquivo utilize o comando no terminal:
 
 # GERAR ARQUIVO/VETORES
 Para gerar um arquivo de tamanho diferente de 10 utilize o comando
- - ./gera_vector <tamanho vetor> -9999
+ - ./gera_vector (tamanho vetor) -9999
 
 Exemplo para vetor de tamanho 100:
  - ./gera_vector 100 -9999
 
 # EXECUTAR APLICAÇÃO
 Para executar a aplicação utilize o comando:
- - ./sort vector-<tamanho>.map
+ - ./sort vector-(tamanho).map
 
 Exemplo para vetor de tamanho 10:
  - ./sort vector-10.map
@@ -33,4 +33,4 @@ Será impresso em tela o vetor desordenado e um número de 1 à 3 será solicita
  - 3: Mergesort
 
 Após isso se o número correto for inserido, o vetor ordenado utilizando o algoritmo solicitado
-será impresso junto ao tempo de execução. Para utilizar outro algoritmo o programa deverá ser executado novamente. 
+será impresso junto ao tempo de execução. Para utilizar outro algoritmo o programa deverá ser executado novamente.
