@@ -46,14 +46,25 @@ int comparar_matriz (int **matriza, int **matrizb, int linha, int coluna){
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int **liberar_matriz (int **matriz, int linha, int coluna) {
-        #TODO
+  for(int i = 0; i < linha; i++){
+    free(matriz[i]);
+  }
+  free(matriz);
 	return NULL;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int **alocar_matriz (int linha, int coluna) {
-        #TODO
-	return nova_a;
+  int i, j;
+  int **mat;
+  mat = (int **) malloc(linha *  sizeof(int *));
+  for(i = 0; i < linha; i++){
+    mat[i] = (int *) malloc(coluna * sizeof(int));
+    for(j = 0; j < coluna; j++){
+      mat[i][j] = 0;
+    }
+  }
+	return mat;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
