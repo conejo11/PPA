@@ -1,9 +1,52 @@
+////////////////////////////////// MAIN TEST ///////////////////////////////////////////////
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// #include "toolsv2.h"
+// #include "matriz.h"
+// #include "matriz-operacoes.h"
+//
+// #define N 10
+// #define M 10
+//
+// int main(int argc, char *argv[]) {
+//
+// 			 int **mat_a = NULL;
+//
+// 			 mat_a = alocar_matriz(N,M);
+//
+// 			 imprimir_matriz(mat_a, N, M);
+//
+// 			 zerar_matriz(mat_a, N, M);
+//
+// 			 imprimir_matriz(mat_a, N, M);
+//
+// 			 gerar_matriz(mat_a, N, M, -9999);
+//
+// 			 imprimir_matriz(mat_a, N, M);
+//
+// 			 gerar_matriz(mat_a, N, M, -8888);
+//
+// 			 imprimir_matriz(mat_a, N, M);
+//
+// 			 gerar_matriz(mat_a, N, M, -7777);
+//
+// 			 imprimir_matriz(mat_a, N, M);
+//
+// 			 liberar_matriz(mat_a, N, M);
+//
+// 			 return 0;
+//
+// }
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "toolsv2.h"
 #include "matriz.h"
 #include "matriz-operacoes.h"
+
+
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int main(int argc, char *argv[]) {
