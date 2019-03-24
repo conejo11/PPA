@@ -79,9 +79,6 @@ int **alocar_matriz (int linha, int coluna) {
   mat = (int **) malloc(linha *  sizeof(int*));
   for(i = 0; i < linha; i++){
     mat[i] = (int *) malloc(coluna * sizeof(int));
-    for(j = 0; j < coluna; j++){
-      mat[i][j] = 1;
-    }
   }
   if (!mat) {
     printf("ERROR: Out of memory\n");

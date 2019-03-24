@@ -173,9 +173,12 @@ int main(int argc, char *argv[]) {
 	// fileout_matriz(mat_final, N, M, fmatbloco_c);
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
-
+	printf("Comparando matriz A e matriz B\n");
 	comparar_matriz (mat_a, mat_b, N, M);
+	printf("\n\n");
+	printf("Comparando matriz A com matriz A\n");
 	comparar_matriz (mat_a, mat_a, N, M);
+	printf("\n\n");
 	printf("Resultados individuais encontram-se nos arquivos <out*.map-result>.\n");
 
   // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
@@ -187,11 +190,12 @@ int main(int argc, char *argv[]) {
 
 	liberar_matriz(mat_a,N,La);
 	liberar_matriz(mat_b,Lb,M);
-	liberar_matriz(mat_c1,N,M);
+	// liberar_matriz(mat_c1,N,M);
+	liberar_matriz(mat_c,N,M);
 
 	fclose(fmat_a);
 	fclose(fmat_b);
-	fclose(fmat_c);
+	// fclose(fmat_c);
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	return 0;
