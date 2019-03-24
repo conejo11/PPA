@@ -34,17 +34,7 @@ Exemplo para matriz 50x100 e 100x50:
  - ./main_matriz 50x100-mat.map 100x50-mat.map
 
 # DENTRO DA APLICAÇÃO
-As duas matrizes serão lidas, alocadas e uma terceira matriz NxM será criada e preenchida com zeros.
-
-As três matrizes serão impressas em tela.
-
-Uma comparação da matriz A com a matriz B será realizada (Muito provavelmente serão diferentes devido a aaleatoriedade).
-
-Uma comparação da matriz A será feita com ela mesma (precisa mostrar que são identicas).
-
-O arquivo "out*.map-result" ainda não é gerado nesta versão inicial.
-
-Os ponteiros serão desalocados e os arquivos fechados.
+O código executado é o apresentado pelo professor no moodle para o teste desta atividade.
 
 # INFORMAÇÕES ADICIONAIS
-o arquivo main_matriz.c apresenta um código simples comentado em seu início para realizar um teste mais direto das funções implementadas. Caso queira utilizálo comente todo o código das linhas 42 até 202 e descomente todo o código da linha 1 até 41. Após isso compile novamente. Para executar a versão mais simples da main é necessário apenas um arquivo de matriz.
+Não há para este trabalho.
