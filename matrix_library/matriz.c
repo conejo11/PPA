@@ -4,6 +4,10 @@
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MATRIZ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int gerar_matriz(int **matriz, int linha, int coluna, int valor){
+  if (!matriz) {
+    printf("ERROR: Out of memory\n");
+    return 1;
+  }
   srand( (unsigned)time(NULL) );
 
   for(int i = 0; i < linha; i++){
@@ -30,11 +34,19 @@ int gerar_matriz(int **matriz, int linha, int coluna, int valor){
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int zerar_matriz (int **matriz, int linha, int coluna){
+  if (!matriz) {
+    printf("ERROR: Out of memory\n");
+    return 1;
+  }
 	return gerar_matriz(matriz,linha,coluna,0);
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int imprimir_matriz (int **matriz, int linha, int coluna){
+  if (!matriz) {
+    printf("ERROR: Out of memory\n");
+    return 1;
+  }
 	for (int j = 0; j < coluna; j++)
 		printf("\t(%d)", j);
 	printf("\n");
@@ -50,6 +62,10 @@ int imprimir_matriz (int **matriz, int linha, int coluna){
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int comparar_matriz (int **matriza, int **matrizb, int linha, int coluna){
+  if (!matriza || !matrizb) {
+    printf("ERROR: Out of memory\n");
+    return 1;
+  }
 	for (int i=0; i < linha; i++) {
 	  for (int j=0; j < coluna; j++){
 			if (matriza[i][j] != matrizb[i][j]) {
@@ -74,17 +90,17 @@ int **liberar_matriz (int **matriz, int linha, int coluna) {
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int **alocar_matriz (int linha, int coluna) {
-  int i, j;
+  int i;
   int **mat = NULL;
-  mat = (int **) malloc(linha *  sizeof(int*));
+  mat = (int **) calloc(linha, sizeof(int*));
   for(i = 0; i < linha; i++){
-    mat[i] = (int *) malloc(coluna * sizeof(int));
+    mat[i] = (int *) calloc(coluna, sizeof(int));
   }
   if (!mat) {
     printf("ERROR: Out of memory\n");
     return NULL;
   }
-  printf("alocou\n");
+  // printf("alocou\n");
 	return mat;
 }
 
