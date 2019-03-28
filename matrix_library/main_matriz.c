@@ -12,10 +12,10 @@ int main(int argc, char *argv[]) {
 	// DECLARAÇÃO de VARIÁVEIS
 	int **mat_a = NULL;
 	int **mat_b = NULL;
-	// int **mat_multIJK = NULL;
+	int **mat_multIJK = NULL;
 	// int **mat_multKJI = NULL;
-	int **mat_somaIJ = NULL;
-	int **mat_somaJI = NULL;
+	// int **mat_somaIJ = NULL;
+	// int **mat_somaJI = NULL;
 	FILE *fmat_a, *fmat_b, *fmat_c;
 	int nr_line;
 	int *vet_line = NULL;
@@ -52,66 +52,66 @@ int main(int argc, char *argv[]) {
 
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
-	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-	// somarJI
-	mat_somaJI = alocar_matriz(N, M);
-	zerar_matriz(mat_somaJI, N, M);
-	if (mat_somaJI == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
-
-	start_time = wtime();
-	somarJI(mat_a,mat_a,mat_somaJI, N, N, N);
-	end_time = wtime();
-	printf("\n ##### somarJI de Matrizes (JI) #####\n");
-	printf("\tRuntime: %f\n", end_time - start_time);
-	fmat_c= fopen("somarJI.map-result","w");
-	fileout_matriz(mat_somaJI, N, M, fmat_c);
-
-	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
-
-	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // somarIJ
-	mat_somaIJ = alocar_matriz(N, M);
-	zerar_matriz(mat_somaIJ, N, M);
-	if (mat_somaIJ == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
-
-	start_time = wtime();
-	somarIJ(mat_a,mat_a,mat_somaIJ, N, N, N);
-	end_time = wtime();
-	printf("\n ##### somarIJ de Matrizes (IJ) #####\n");
-	printf("\tRuntime: %f\n", end_time - start_time);
-	fmat_c= fopen("somarIJ.map-result","w");
-	fileout_matriz(mat_somaIJ, N, M, fmat_c);
-
-	comparar_matriz (mat_somaIJ, mat_somaJI, N, M);
-
-	liberar_matriz(mat_somaJI,N,M);
-	liberar_matriz(mat_somaIJ,N,M);
-	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
-
 	// // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // // Multiplicação IJK
-	// mat_multIJK = alocar_matriz(N, M);
-	// zerar_matriz(mat_multIJK, N, M);
-	// if (mat_multIJK == NULL) {
+	// // somarJI
+	// mat_somaJI = alocar_matriz(N, M);
+	// zerar_matriz(mat_somaJI, N, M);
+	// if (mat_somaJI == NULL) {
 	// 	printf("ERROR: Out of memory\n");
 	// }
 	//
-	// zerar_matriz(mat_multIJK, N, M);
 	// start_time = wtime();
-	// multiplicarIJK(mat_a,mat_b,mat_multIJK, N, La, M);
+	// somarJI(mat_a,mat_a,mat_somaJI, N, N, N);
 	// end_time = wtime();
-	// printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
+	// printf("\n ##### somarJI de Matrizes (JI) #####\n");
 	// printf("\tRuntime: %f\n", end_time - start_time);
-	// fmat_c= fopen("multiIJK.map-result","w");
-	// fileout_matriz(mat_multIJK, N, M, fmat_c);
+	// fmat_c= fopen("somarJI.map-result","w");
+	// fileout_matriz(mat_somaJI, N, M, fmat_c);
+	//
 	// // %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 	//
 	// // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // // Multiplicação KJI
+  // // somarIJ
+	// mat_somaIJ = alocar_matriz(N, M);
+	// zerar_matriz(mat_somaIJ, N, M);
+	// if (mat_somaIJ == NULL) {
+	// 	printf("ERROR: Out of memory\n");
+	// }
+	//
+	// start_time = wtime();
+	// somarIJ(mat_a,mat_a,mat_somaIJ, N, N, N);
+	// end_time = wtime();
+	// printf("\n ##### somarIJ de Matrizes (IJ) #####\n");
+	// printf("\tRuntime: %f\n", end_time - start_time);
+	// fmat_c= fopen("somarIJ.map-result","w");
+	// fileout_matriz(mat_somaIJ, N, M, fmat_c);
+	//
+	// comparar_matriz (mat_somaIJ, mat_somaJI, N, M);
+	//
+	// liberar_matriz(mat_somaJI,N,M);
+	// liberar_matriz(mat_somaIJ,N,M);
+	// // %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
+
+	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
+  // Multiplicação IJK
+	mat_multIJK = alocar_matriz(N, M);
+	zerar_matriz(mat_multIJK, N, M);
+	if (mat_multIJK == NULL) {
+		printf("ERROR: Out of memory\n");
+	}
+
+	zerar_matriz(mat_multIJK, N, M);
+	start_time = wtime();
+	multiplicarIJK(mat_a,mat_b,mat_multIJK, N, La, M);
+	end_time = wtime();
+	printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
+	printf("\tRuntime: %f\n", end_time - start_time);
+	fmat_c= fopen("multiIJK.map-result","w");
+	fileout_matriz(mat_multIJK, N, M, fmat_c);
+	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
+
+	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
+  // Multiplicação KJI
 	// mat_multKJI = alocar_matriz(N, M);
 	// zerar_matriz(mat_multKJI, N, M);
 	// if (mat_multKJI == NULL) {
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
 	// comparar_matriz (mat_multIJK, mat_multKJI, N, M);
 	// liberar_matriz(mat_multIJK,N,M);
 	// liberar_matriz(mat_multKJI,N,M);
-	// // %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
+	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	liberar_matriz(mat_a,N,La);
 	liberar_matriz(mat_b,Lb,M);
