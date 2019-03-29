@@ -8,10 +8,10 @@ int somarIJ (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) {
 		return 1;
 	}
 
-	if(N != L && L != M){
-		printf("Matrizes não possuem as mesmas dimensões\n");
-		return 1;
-	}
+	// if(N != L && L != M){
+	// 	printf("Matrizes não possuem as mesmas dimensões\n");
+	// 	return 1;
+	// }
 
 	int i,j;
 	for(i=0; i<N; i++){
@@ -30,10 +30,10 @@ int somarJI (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) {
 		return 1;
 	}
 
-	if(N != L && L != M){
-		printf("Matrizes não possuem as mesmas dimensões\n");
-		return 1;
-	}
+	// if(N != L && L != M){
+	// 	printf("Matrizes não possuem as mesmas dimensões\n");
+	// 	return 1;
+	// }
 
 	int i,j;
 	for(i=0; i<N; i++){
@@ -73,8 +73,8 @@ int multiplicarIKJ (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 
 	int i,j,k;
 	for(i = 0; i < N; i++){
-		for(j = 0; j < M; j++){
-			for(k = 0; k < L; k++){
+		for(k = 0; k < L; k++){
+			for(j = 0; j < M; j++){
 				mat_c[i][j] += mat_a[i][k] * mat_b[k][j];
 			}
 		}
@@ -91,9 +91,9 @@ int multiplicarKIJ (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 	}
 
 	int i,j,k;
-	for(i = 0; i < N; i++){
-		for(j = 0; j < M; j++){
-			for(k = 0; k < L; k++){
+	for(k = 0; k < L; k++){
+		for(i = 0; i < N; i++){
+			for(j = 0; j < M; j++){
 				mat_c[i][j] += mat_a[i][k] * mat_b[k][j];
 			}
 		}
@@ -110,10 +110,10 @@ int multiplicarKJI (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 		return 1;
 	}
 
-	int i,j,k;
-	for(i = 0; i < N; i++){
+  int i,j,k;
+	for(k = 0; k < L; k++){
 		for(j = 0; j < M; j++){
-			for(k = 0; k < L; k++){
+			for(i = 0; i < N; i++){
 				mat_c[i][j] += mat_a[i][k] * mat_b[k][j];
 			}
 		}
@@ -130,8 +130,8 @@ int multiplicarJIK (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 	}
 
 	int i,j,k;
-	for(i = 0; i < N; i++){
-		for(j = 0; j < M; j++){
+	for(j = 0; j < M; j++){
+		for(i = 0; i < N; i++){
 			for(k = 0; k < L; k++){
 				mat_c[i][j] += mat_a[i][k] * mat_b[k][j];
 			}
@@ -149,14 +149,14 @@ int multiplicarJKI (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 	}
 
 	int i,j,k;
-	for(i = 0; i < N; i++){
-		for(j = 0; j < M; j++){
-			for(k = 0; k < L; k++){
+	for(j = 0; j < M; j++){
+		for(k = 0; k < L; k++){
+			for(i = 0; i < N; i++){
 				mat_c[i][j] += mat_a[i][k] * mat_b[k][j];
 			}
 		}
 	}
-	
+
   return 0;
 }
 

@@ -63,7 +63,7 @@ int imprimir_matriz (int **matriz, int linha, int coluna){
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int comparar_matriz (int **matriza, int **matrizb, int linha, int coluna){
   if (!matriza || !matrizb) {
-    printf("ERROR: Out of memory\n");
+    printf("ERROR: Out of memory (Nao foi inicializada possivelmente pois a soma ou multiplicacao nao atenderam os criterios)\n");
     return 1;
   }
 	for (int i=0; i < linha; i++) {
