@@ -34,7 +34,7 @@ Exemplo para matriz 50x100 e 100x50:
  - ./main_matriz 50x100-mat.map 100x50-mat.map
 
 # DENTRO DA APLICAÇÃO
-O código executado é o apresentado pelo professor no moodle para o teste desta atividade.
+O código executado é o apresentado pelo professor no moodle para o teste desta atividade com modificações apresentadas abaixo.
 
 # INFORMAÇÕES ADICIONAIS
 Testes foram adicionados para verificar se as matrizes atendem os critérios para soma e multiplicação.
@@ -47,3 +47,7 @@ a soma e multiplicação devem ser sempre da matriz A com a matriz B, exemplo:
 
 Para comparar a matriz A com ela mesma passe-a como parâmetro 2 vezes ao executar a aplicação:
   - ./main_matriz mat_a.map mat_a.map
+
+Como foi explicado em aula:
+  - Soma: Todas as matrizes devem ter dimensão NxM
+  - Mult: Matriz A deve ter coluna de mesmo tamanho da linha da Matriz B, gerando uma Matriz C NxM
