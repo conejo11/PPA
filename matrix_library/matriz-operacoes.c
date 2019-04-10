@@ -163,7 +163,18 @@ int multiplicarJKI (int **mat_a, int **mat_b, int **mat_c, int N, int L, int M) 
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int multiplicar_submatriz (matriz_bloco_t *mat_suba, matriz_bloco_t *mat_subb, matriz_bloco_t *mat_subc) {
-	//TODO
+  if(!mat_suba || !mat_subb || !mat_subc){
+		printf("ERROR: Out of memory\n");
+		return 1;
+	}
 
+  int i,j,k;
+  for(i = 0; i < mat_suba->bloco->lin_fim; i++){
+  	for(j = 0; j < mat_subb->bloco->col_fim; j++){
+  		for(k = 0; k < mat_suba->bloco->col_fim; k++){
+  			mat_subc->matriz[i][j] += mat_suba->matriz[i][k] * mat_subb->matriz[k][j];
+  		}
+  	}
+  }
 	return 0;
 }

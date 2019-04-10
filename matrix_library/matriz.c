@@ -104,39 +104,96 @@ int **alocar_matriz (int linha, int coluna) {
 	return mat;
 }
 
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-int gerar_submatriz (int **mat_origem, matriz_bloco_t *submatriz, bloco_t *bloco) {
-        // #TODO
-  return 0;
-}
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-int imprimir_submatriz (matriz_bloco_t *submatriz){
-        // #TODO
-	return 0;
-}
-
-// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-int imprimir_bloco (matriz_bloco_t *submatriz) {
-        // #TODO
-	return 0;
-}
+// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// int gerar_submatriz (int **mat_origem, matriz_bloco_t *submatriz, bloco_t *bloco) {
+//         // #TODO
+//   return 0;
+// }
+//
+// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// int imprimir_submatriz (matriz_bloco_t *submatriz){
+//         // #TODO
+// 	return 0;
+// }
+//
+// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// int imprimir_bloco (matriz_bloco_t *submatriz) {
+//         // #TODO
+// 	return 0;
+// }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // orientacao, 0 corte horizontal, 1 para corte vertical
-matriz_bloco_t **particionar_matriz (int **matriz, int mat_lin, int mat_col, int orientacao) {
-        // #TODO
+matriz_bloco_t **particionar_matriz (int **matriz, int mat_lin, int mat_col, int orientacao, int divisor) {
+  matriz_bloco_t **block = NULL;
+  block = (matriz_bloco_t **) calloc(divisor, sizeof(matriz_bloco_t*));
+  if (!block || !matriz) {
+    printf("ERROR: Out of memory\n");
+    return NULL;
+  }
+  for(int i = 0; i< divisor; i++){
+    block[i] = (matriz_bloco_t *) malloc(sizeof(matriz_bloco_t));
+    block[i]->bloco = (bloco_t *) malloc(sizeof(bloco_t));
+  }
+  if(orientacao == 0){
+    int linInit = 0;
+    int linFinish = (mat_lin/divisor);
+    for(int i=0; i<divisor; i++){
+      block[i]->matriz = matriz;
+      block[i]->bloco->lin_inicio = linInit;
+      block[i]->bloco->lin_fim = linFinish;
+      block[i]->bloco->col_inicio = 0;
+      block[i]->bloco->col_fim = mat_col;
+      linInit = (mat_lin/divisor);
+      linFinish = mat_lin;
+    }
+    return block;
+  } else {
+    int colInit = 0;
+    int colFinish = (mat_col/divisor);
+    for(int i=0; i<divisor; i++){
+      block[i]->matriz = matriz;
+      block[i]->bloco->lin_inicio = 0;
+      block[i]->bloco->lin_fim = mat_lin;
+      block[i]->bloco->col_inicio = colInit;
+      block[i]->bloco->col_fim = colFinish;
+      colInit = (mat_col/divisor);
+      colFinish = mat_col;
+    }
+    return block;
+  }
   return NULL;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-matriz_bloco_t **constroi_submatriz (int **matriz, int mat_lin, int mat_col, int divisor) {
-        // #TODO
-	return NULL;
+matriz_bloco_t **constroi_submatrizv2 (int mat_lin, int mat_col, int divisor) {
+  matriz_bloco_t **block = NULL;
+  block = (matriz_bloco_t **) calloc(divisor, sizeof(matriz_bloco_t*));
+  if (!block) {
+    printf("ERROR: Out of memory\n");
+    return NULL;
+  }
+  for(int i = 0; i< divisor; i++){
+    block[i] = (matriz_bloco_t *) malloc(sizeof(matriz_bloco_t));
+    block[i]->bloco = (bloco_t *) malloc(sizeof(bloco_t));
+  }
+  for(int i=0; i<divisor; i++){
+    int **matBl = alocar_matriz(mat_lin, mat_col);
+    block[i]->matriz = matBl;
+    block[i]->bloco->lin_inicio = 0;
+    block[i]->bloco->lin_fim = mat_lin;
+    block[i]->bloco->col_inicio = 0;
+    block[i]->bloco->col_fim = mat_col;
+  }
+	return block;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-matriz_bloco_t **liberar_submatriz (matriz_bloco_t **submatriz) {
-        // #TODO
+matriz_bloco_t **liberar_submatriz (matriz_bloco_t **submatriz, int divisor) {
+    for(int i = 0; i<divisor; i++){
+      free(submatriz[i]->bloco);
+      free(submatriz[i]);
+    }
+    free(submatriz);
   return NULL;
 }

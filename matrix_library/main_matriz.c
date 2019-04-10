@@ -12,15 +12,18 @@ int main(int argc, char *argv[]) {
 	// DECLARAÇÃO de VARIÁVEIS
 	int **mat_a = NULL;
 	int **mat_b = NULL;
-	int **mat_multIJK = NULL;
-	int **mat_multKJI = NULL;
-	int **mat_somaIJ = NULL;
-	int **mat_somaJI = NULL;
-	FILE *fmat_a, *fmat_b, *fmat_c;
+	int **mat_c = NULL;
+	FILE *fmat_a, *fmat_b, *fmat_c, *fmatbloco_c;
 	int nr_line;
 	int *vet_line = NULL;
 	int N, M, La, Lb;
 	double start_time, end_time;
+
+	matriz_bloco_t **Vsubmat_a = NULL;
+	matriz_bloco_t **Vsubmat_b = NULL;
+	matriz_bloco_t **Vsubmat_c = NULL;
+	int nro_submatrizes=2;
+	int **mat_bloco_final = NULL;
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	if (argc != 3){
@@ -46,116 +49,70 @@ int main(int argc, char *argv[]) {
 	mat_b = alocar_matriz(Lb, M);
 	filein_matriz (mat_b, Lb, M, fmat_b, vet_line, nr_line);
 
-	if ((mat_b == NULL) || (mat_a == NULL)) {
+	// matriz_c (resultante) = N (linha) x M(coluna)
+	mat_c = alocar_matriz(N, M);
+	zerar_matriz(mat_c, N, M);
+
+	if ((mat_c == NULL) || (mat_b == NULL) || (mat_a == NULL)) {
 		printf("ERROR: Out of memory\n");
 	}
-
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
-
-	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-	// somarJI
-	mat_somaJI = alocar_matriz(N, M);
-	zerar_matriz(mat_somaJI, N, M);
-	if (mat_somaJI == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
-
-	if(N != Lb || M != La){
-		printf("ERROR: Matrizes A e B nao sao NxM\nNao sera feita soma\n\n");
-	} else {
-		start_time = wtime();
-		somarJI(mat_a,mat_b,mat_somaJI, N, N, N);
-		end_time = wtime();
-		printf("\n ##### somarJI de Matrizes (JI) #####\n");
-		printf("\tRuntime: %f\n", end_time - start_time);
-		fmat_c= fopen("somarJI.map-result","w");
-		fileout_matriz(mat_somaJI, N, M, fmat_c);
-		fclose(fmat_c);
-	}
-
-	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
-
-	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // somarIJ
-	mat_somaIJ = alocar_matriz(N, M);
-	zerar_matriz(mat_somaIJ, N, M);
-	if (mat_somaIJ == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
-
-	if(N != Lb || M != La){
-		printf("ERROR: Matrizes A e B nao sao NxM\nNao sera feita soma\n\n");
-	} else {
-		start_time = wtime();
-		somarIJ(mat_a,mat_b,mat_somaIJ, N, N, N);
-		end_time = wtime();
-		printf("\n ##### somarIJ de Matrizes (IJ) #####\n");
-		printf("\tRuntime: %f\n", end_time - start_time);
-		fmat_c= fopen("somarIJ.map-result","w");
-		fileout_matriz(mat_somaIJ, N, M, fmat_c);
-		fclose(fmat_c);
-		comparar_matriz (mat_somaIJ, mat_somaJI, N, M);
-	}
-
-	liberar_matriz(mat_somaJI,N,M);
-	liberar_matriz(mat_somaIJ,N,M);
-	// // %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
   // Multiplicação IJK
-	mat_multIJK = alocar_matriz(N, M);
-	zerar_matriz(mat_multIJK, N, M);
-	if (mat_multIJK == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
-
-	zerar_matriz(mat_multIJK, N, M);
-	if(La != Lb){
-		printf("ERROR: Coluna matriz A e linha matriz B nao sao do mesmo tamanho\nNao sera feita multiplicacao\n\n");
-	} else {
-		start_time = wtime();
-		multiplicarIJK(mat_a,mat_b,mat_multIJK, N, La, M);
-		end_time = wtime();
-		printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
-		printf("\tRuntime: %f\n", end_time - start_time);
-		fmat_c= fopen("multiIJK.map-result","w");
-		fileout_matriz(mat_multIJK, N, M, fmat_c);
-		fclose(fmat_c);
-	}
+	zerar_matriz(mat_c, N, M);
+	start_time = wtime();
+	multiplicarIJK(mat_a,mat_b,mat_c, N, La, M);
+	end_time = wtime();
+	printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
+	printf("\tRuntime: %f\n", end_time - start_time);
+	fmat_c= fopen("outIJK.map-result","w");
+	fileout_matriz(mat_c, N, M, fmat_c);
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // Multiplicação KJI
-	mat_multKJI = alocar_matriz(N, M);
-	zerar_matriz(mat_multKJI, N, M);
-	if (mat_multKJI == NULL) {
-		printf("ERROR: Out of memory\n");
-	}
+  // Multiplicação em Bloco v2
+  printf(" ##### Multiplicação de Matrizes (blocov2) #####\n");
+	start_time = wtime();
 
-	zerar_matriz(mat_multKJI, N, M);
-	if(La != Lb){
-		printf("ERROR: Coluna matriz A e linha matriz B nao sao do mesmo tamanho\nNao sera feita multiplicacao\n\n");
-	} else {
-		start_time = wtime();
-		multiplicarKJI(mat_a,mat_b,mat_multKJI, N, La, M);
-		end_time = wtime();
-		printf("\n ##### Multiplicação de Matrizes (KJI) #####\n");
-		printf("\tRuntime: %f\n", end_time - start_time);
-		fmat_c= fopen("multiKJI.map-result","w");
-		fileout_matriz(mat_multKJI, N, M, fmat_c);
-		fclose(fmat_c);
-		comparar_matriz (mat_multIJK, mat_multKJI, N, M);
-	}
-	liberar_matriz(mat_multIJK,N,M);
-	liberar_matriz(mat_multKJI,N,M);
+	Vsubmat_a = particionar_matriz (mat_a, N, La, 0, 2);
+	printf(" foi1\n");
+	Vsubmat_b = particionar_matriz (mat_b, Lb, M, 1, 2);
+	printf(" foi2\n");
+	Vsubmat_c = constroi_submatrizv2 (N, M, nro_submatrizes);
+  printf(" foi3\n");
+	mat_bloco_final = alocar_matriz(N, M);
+	zerar_matriz(mat_bloco_final, N, M);
+	printf(" foi4\n");
+
+	multiplicar_submatriz (Vsubmat_a[0], Vsubmat_b[0], Vsubmat_c[0]);
+	multiplicar_submatriz (Vsubmat_a[1], Vsubmat_b[1], Vsubmat_c[1]);
+	somarIJ(Vsubmat_c[0]->matriz,Vsubmat_c[1]->matriz,mat_bloco_final, N, N, N);
+
+	end_time = wtime();
+
+	printf("\tRuntime: %f\n\n", end_time - start_time);
+	fmatbloco_c = fopen("outBlocov2.map-result","w");
+	fileout_matriz(mat_bloco_final, N, M, fmatbloco_c);
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
+
+	comparar_matriz (mat_c, mat_bloco_final, N, M);
+	printf("Resultados individuais encontram-se nos arquivos <out*.map-result>.\n");
+
+  // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
+	// LIBERAR MEMÓRIA
+	liberar_submatriz (Vsubmat_a,2);
+	liberar_submatriz (Vsubmat_b,2);
+	liberar_submatriz (Vsubmat_c,2);
 
 	liberar_matriz(mat_a,N,La);
 	liberar_matriz(mat_b,Lb,M);
+	liberar_matriz(mat_c,N,M);
+	liberar_matriz(mat_bloco_final,N,M);
+
 	fclose(fmat_a);
 	fclose(fmat_b);
-
-
+	fclose(fmat_c);
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	return 0;
