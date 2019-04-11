@@ -1,4 +1,4 @@
-# FUNÇÕES PARA OPERAÇÕES COM MATRIZES
+# FUNÇÕES PARA OPERAÇÕES COM MATRIZES EM BLOCO
 Segundo exercício, este arquivo documenta como executá-lo.
 
 # COMPILAR
@@ -37,13 +37,11 @@ Exemplo para matriz 50x100 e 100x50:
 O código executado é o apresentado pelo professor no moodle para o teste desta atividade com modificações apresentadas abaixo.
 
 # INFORMAÇÕES ADICIONAIS
-Testes foram adicionados para verificar se as matrizes atendem os critérios para soma e multiplicação.
+Testes foram adicionados para verificar se as matrizes atendem os critérios para multiplicação.
 
-Caso deixe dentro do código como o professor colocou no main de exemplo:
-  - somarIJ(mat_a,mat_a,mat_somaIJ, N, N, N);
-Não irá funcionar devido ao teste da propriedade de adição e multiplicação que compara as dimensões de A e B,
-a soma e multiplicação devem ser sempre da matriz A com a matriz B, exemplo:
-  - somarIJ(mat_a,mat_b,mat_somaIJ, N, N, N);
+Para somar as matrizes resultantes da multiplicação em bloco utilize como modelo:
+  - somarIJ(mat_a,mat_b,mat_somaIJ, N, La, M);
+Os 3 parâmetros finais devem ser sempre N, La e M para que a soma das submatrizes funcione.
 
 Para comparar a matriz A com ela mesma passe-a como parâmetro 2 vezes ao executar a aplicação:
   - ./main_matriz mat_a.map mat_a.map
