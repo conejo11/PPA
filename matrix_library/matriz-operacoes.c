@@ -169,9 +169,9 @@ int multiplicar_submatriz (matriz_bloco_t *mat_suba, matriz_bloco_t *mat_subb, m
 	}
 
   int i,j,k;
-  for(i = 0; i < mat_suba->bloco->lin_fim; i++){
-  	for(j = 0; j < mat_subb->bloco->col_fim; j++){
-  		for(k = 0; k < mat_suba->bloco->col_fim; k++){
+  for(i = mat_suba->bloco->lin_inicio; i < mat_suba->bloco->lin_fim; i++){
+  	for(j = mat_subb->bloco->col_inicio; j < mat_subb->bloco->col_fim; j++){
+  		for(k = mat_suba->bloco->col_inicio; k < mat_suba->bloco->col_fim; k++){
   			mat_subc->matriz[i][j] += mat_suba->matriz[i][k] * mat_subb->matriz[k][j];
   		}
   	}

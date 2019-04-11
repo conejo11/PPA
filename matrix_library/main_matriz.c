@@ -59,60 +59,62 @@ int main(int argc, char *argv[]) {
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // Multiplicação IJK
-	zerar_matriz(mat_c, N, M);
-	start_time = wtime();
-	multiplicarIJK(mat_a,mat_b,mat_c, N, La, M);
-	end_time = wtime();
-	printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
-	printf("\tRuntime: %f\n", end_time - start_time);
-	fmat_c= fopen("outIJK.map-result","w");
-	fileout_matriz(mat_c, N, M, fmat_c);
-	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
-	// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-  // Multiplicação em Bloco v2
-  printf(" ##### Multiplicação de Matrizes (blocov2) #####\n");
-	start_time = wtime();
+	if(La != Lb){
+		printf("Coluna de A diferente de Linha de B, não é possível multiplicar\n");
+		return 1;
+	} else {
+  	// Multiplicação IJK
+		zerar_matriz(mat_c, N, M);
+		start_time = wtime();
+		multiplicarIJK(mat_a,mat_b,mat_c, N, La, M);
+		end_time = wtime();
+		printf("\n ##### Multiplicação de Matrizes (IJK) #####\n");
+		printf("\tRuntime: %f\n", end_time - start_time);
+		fmat_c= fopen("outIJK.map-result","w");
+		fileout_matriz(mat_c, N, M, fmat_c);
+		// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
-	Vsubmat_a = particionar_matriz (mat_a, N, La, 0, 2);
-	printf(" foi1\n");
-	Vsubmat_b = particionar_matriz (mat_b, Lb, M, 1, 2);
-	printf(" foi2\n");
-	Vsubmat_c = constroi_submatrizv2 (N, M, nro_submatrizes);
-  printf(" foi3\n");
-	mat_bloco_final = alocar_matriz(N, M);
-	zerar_matriz(mat_bloco_final, N, M);
-	printf(" foi4\n");
+		// %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
+	  // Multiplicação em Bloco v2
+	  printf(" ##### Multiplicação de Matrizes (blocov2) #####\n");
+		start_time = wtime();
 
-	multiplicar_submatriz (Vsubmat_a[0], Vsubmat_b[0], Vsubmat_c[0]);
-	multiplicar_submatriz (Vsubmat_a[1], Vsubmat_b[1], Vsubmat_c[1]);
-	somarIJ(Vsubmat_c[0]->matriz,Vsubmat_c[1]->matriz,mat_bloco_final, N, N, N);
+		Vsubmat_a = particionar_matriz (mat_a, N, La, 1, 2);
+		Vsubmat_b = particionar_matriz (mat_b, Lb, M, 0, 2);
+		Vsubmat_c = constroi_submatrizv2 (N, M, nro_submatrizes);
+		mat_bloco_final = alocar_matriz(N, M);
+		zerar_matriz(mat_bloco_final, N, M);
 
-	end_time = wtime();
+		multiplicar_submatriz (Vsubmat_a[0], Vsubmat_b[0], Vsubmat_c[0]);
+		multiplicar_submatriz (Vsubmat_a[1], Vsubmat_b[1], Vsubmat_c[1]);
+		somarIJ(Vsubmat_c[0]->matriz,Vsubmat_c[1]->matriz,mat_bloco_final, N, La, M);
 
-	printf("\tRuntime: %f\n\n", end_time - start_time);
-	fmatbloco_c = fopen("outBlocov2.map-result","w");
-	fileout_matriz(mat_bloco_final, N, M, fmatbloco_c);
-	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
+		end_time = wtime();
 
-	comparar_matriz (mat_c, mat_bloco_final, N, M);
-	printf("Resultados individuais encontram-se nos arquivos <out*.map-result>.\n");
+		printf("\tRuntime: %f\n\n", end_time - start_time);
+		fmatbloco_c = fopen("outBlocov2.map-result","w");
+		fileout_matriz(mat_bloco_final, N, M, fmatbloco_c);
+		// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
-  // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
-	// LIBERAR MEMÓRIA
-	liberar_submatriz (Vsubmat_a,2);
-	liberar_submatriz (Vsubmat_b,2);
-	liberar_submatriz (Vsubmat_c,2);
+		comparar_matriz (mat_c, mat_bloco_final, N, M);
+		printf("Resultados individuais encontram-se nos arquivos <out*.map-result>.\n");
 
-	liberar_matriz(mat_a,N,La);
-	liberar_matriz(mat_b,Lb,M);
-	liberar_matriz(mat_c,N,M);
-	liberar_matriz(mat_bloco_final,N,M);
+	  // %%%%%%%%%%%%%%%%%%%%%%%% BEGIN %%%%%%%%%%%%%%%%%%%%%%%%
+		// LIBERAR MEMÓRIA
+		liberar_submatriz (Vsubmat_a,2);
+		liberar_submatriz (Vsubmat_b,2);
+		liberar_submatriz (Vsubmat_c,2);
 
-	fclose(fmat_a);
-	fclose(fmat_b);
-	fclose(fmat_c);
+		liberar_matriz(mat_a,N,La);
+		liberar_matriz(mat_b,Lb,M);
+		liberar_matriz(mat_c,N,M);
+		liberar_matriz(mat_bloco_final,N,M);
+
+		fclose(fmat_a);
+		fclose(fmat_b);
+		fclose(fmat_c);
+	}
 	// %%%%%%%%%%%%%%%%%%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%
 
 	return 0;

@@ -135,29 +135,30 @@ matriz_bloco_t **particionar_matriz (int **matriz, int mat_lin, int mat_col, int
     block[i] = (matriz_bloco_t *) malloc(sizeof(matriz_bloco_t));
     block[i]->bloco = (bloco_t *) malloc(sizeof(bloco_t));
   }
+
   if(orientacao == 0){
     int linInit = 0;
-    int linFinish = (mat_lin/divisor);
+    int linFinish = mat_col/divisor;
     for(int i=0; i<divisor; i++){
       block[i]->matriz = matriz;
       block[i]->bloco->lin_inicio = linInit;
       block[i]->bloco->lin_fim = linFinish;
       block[i]->bloco->col_inicio = 0;
       block[i]->bloco->col_fim = mat_col;
-      linInit = (mat_lin/divisor);
+      linInit = mat_col/divisor;
       linFinish = mat_lin;
     }
     return block;
   } else {
     int colInit = 0;
-    int colFinish = (mat_col/divisor);
+    int colFinish = mat_lin/divisor;
     for(int i=0; i<divisor; i++){
       block[i]->matriz = matriz;
       block[i]->bloco->lin_inicio = 0;
       block[i]->bloco->lin_fim = mat_lin;
       block[i]->bloco->col_inicio = colInit;
       block[i]->bloco->col_fim = colFinish;
-      colInit = (mat_col/divisor);
+      colInit = mat_lin/divisor;
       colFinish = mat_col;
     }
     return block;
