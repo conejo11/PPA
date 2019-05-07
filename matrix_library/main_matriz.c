@@ -4,6 +4,7 @@
 #include "toolsv2.h"
 #include "matriz.h"
 #include "matriz-operacoes.h"
+#include "matriz-operacoes-threads.h"
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 int main(int argc, char *argv[]) {

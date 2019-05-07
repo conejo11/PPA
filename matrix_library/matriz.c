@@ -53,7 +53,7 @@ int imprimir_matriz (int **matriz, int linha, int coluna){
 	for (int i = 0; i < linha; i++) {
 		printf("(%d)", i);
 	  for (int j = 0; j < coluna; j++){
-			printf("\t%d", matriz[i][j]);
+			printf("\t%d", matriz[i][j])
 		}
 		printf("\n");
 	}
@@ -103,24 +103,6 @@ int **alocar_matriz (int linha, int coluna) {
   // printf("alocou\n");
 	return mat;
 }
-
-// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// int gerar_submatriz (int **mat_origem, matriz_bloco_t *submatriz, bloco_t *bloco) {
-//         // #TODO
-//   return 0;
-// }
-//
-// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// int imprimir_submatriz (matriz_bloco_t *submatriz){
-//         // #TODO
-// 	return 0;
-// }
-//
-// // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-// int imprimir_bloco (matriz_bloco_t *submatriz) {
-//         // #TODO
-// 	return 0;
-// }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // orientacao, 0 corte horizontal, 1 para corte vertical
