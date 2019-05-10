@@ -28,7 +28,7 @@ help:
 	@echo
 	@echo
 	@echo "####### Exemplo de Execução #######"
-	@echo "./main_matriz mat_a3x4.example mat_b4x3.example"
+	@echo "./main_matriz mat_a3x4.example mat_b4x3.example 20 4 "
 	@echo
 	@echo
 

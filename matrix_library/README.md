@@ -1,4 +1,4 @@
-# FUNÇÕES PARA OPERAÇÕES COM MATRIZES EM BLOCO
+# FUNÇÕES PARA OPERAÇÕES COM MATRIZES EM BLOCO E NORMAL UTILIZANDO THREADS
 Segundo exercício, este arquivo documenta como executá-lo.
 
 # COMPILAR
@@ -28,13 +28,17 @@ Exemplo para matriz 50 x 100:
 
 # EXECUTAR APLICAÇÃO
 Para executar a aplicação utilize o comando:
- - ./main_matriz (dimensões)-mat.map (dimensões)-mat.map
+ - ./main_matriz (dimensões)-mat.map (dimensões)-mat.map (numero de blocos) (numero de threads)
 
 Exemplo para matriz 50x100 e 100x50:
- - ./main_matriz 50x100-mat.map 100x50-mat.map
+ - ./main_matriz 50x100-mat.map 100x50-mat.map 20 4
 
 # DENTRO DA APLICAÇÃO
-O código executado é o apresentado pelo professor no moodle para o teste desta atividade com modificações apresentadas abaixo.
+O código executado segue o modelo sugerido pelo professor no exercício.
+
+Ao final da execução as matrizes serão verificadas para saber se os resultados são identicos.
+A media de tempo de cada algoritmo será apresentada.
+O speedup alcançado tanto na multiplicação normal quanto na de blocos será apresentado.
 
 # INFORMAÇÕES ADICIONAIS
 Testes foram adicionados para verificar se as matrizes atendem os critérios para multiplicação.
