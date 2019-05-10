@@ -53,7 +53,7 @@ int imprimir_matriz (int **matriz, int linha, int coluna){
 	for (int i = 0; i < linha; i++) {
 		printf("(%d)", i);
 	  for (int j = 0; j < coluna; j++){
-			printf("\t%d", matriz[i][j])
+			printf("\t%d", matriz[i][j]);
 		}
 		printf("\n");
 	}
@@ -74,7 +74,7 @@ int comparar_matriz (int **matriza, int **matrizb, int linha, int coluna){
 			}
 		}
 	}
-	printf("VERIFICADO: Matrizes identicas\n");
+	printf("VERIFICADO: Matrizes identicas\n\n");
 	return 0;
 }
 
@@ -119,33 +119,28 @@ matriz_bloco_t **particionar_matriz (int **matriz, int mat_lin, int mat_col, int
   }
 
   if(orientacao == 0){
-    int linInit = 0;
-    int linFinish = mat_col/divisor;
+    int desloc = mat_lin/divisor;
     for(int i=0; i<divisor; i++){
       block[i]->matriz = matriz;
-      block[i]->bloco->lin_inicio = linInit;
-      block[i]->bloco->lin_fim = linFinish;
+      block[i]->bloco->lin_inicio = i * desloc;
+      block[i]->bloco->lin_fim = (i+1) * desloc;
       block[i]->bloco->col_inicio = 0;
       block[i]->bloco->col_fim = mat_col;
-      linInit = mat_col/divisor;
-      linFinish = mat_lin;
+
     }
-    return block;
+    block[divisor-1]->bloco->lin_fim = mat_lin;
   } else {
-    int colInit = 0;
-    int colFinish = mat_lin/divisor;
+    int desloc = mat_col/divisor;
     for(int i=0; i<divisor; i++){
       block[i]->matriz = matriz;
       block[i]->bloco->lin_inicio = 0;
       block[i]->bloco->lin_fim = mat_lin;
-      block[i]->bloco->col_inicio = colInit;
-      block[i]->bloco->col_fim = colFinish;
-      colInit = mat_lin/divisor;
-      colFinish = mat_col;
+      block[i]->bloco->col_inicio = i * desloc;
+      block[i]->bloco->col_fim = (i+1) * desloc;
     }
-    return block;
+    block[divisor-1]->bloco->col_fim = mat_col;
   }
-  return NULL;
+  return block;
 }
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
