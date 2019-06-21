@@ -69,7 +69,7 @@ int comparar_matriz (int **matriza, int **matrizb, int linha, int coluna){
 	for (int i=0; i < linha; i++) {
 	  for (int j=0; j < coluna; j++){
 			if (matriza[i][j] != matrizb[i][j]) {
-				printf("O elemento [%d,%d] é diferente nas matrizes analisadas!\n", i,j);
+				printf("O elemento [%d,%d] é diferente nas matrizes analisadas! %d != %d\n", i,j,matriza[i][j], matrizb[i][j]);
 				return 1;
 			}
 		}

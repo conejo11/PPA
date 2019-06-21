@@ -1,6 +1,6 @@
 # GNU Makefile
 
-CC = gcc
+CC = mpicc
 CCFLAGS = -Wall -O3 -pthread -fopenmp #-llikwid #-funroll-all-loops
 LDFLAGS =
 TARGET = main_matriz gera_matriz2 help
@@ -14,11 +14,12 @@ all: $(TARGET)
 %: %.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
-main_matriz: main_matriz.c matriz.o toolsv2.o matriz-operacoes.o matriz-operacoes-threads.o matriz-operacoes-omp.o
-	$(CC) $(CCFLAGS) matriz-operacoes-omp.o matriz-operacoes-threads.o matriz-operacoes.o matriz.o toolsv2.o main_matriz.c -o $@ $(LDFLAGS)
+main_matriz: main_matriz.c matriz.o toolsv2.o matriz-operacoes.o matriz-operacoes-threads.o matriz-operacoes-omp.o multiplicarMPI.o
+	$(CC) $(CCFLAGS) multiplicarMPI.o matriz-operacoes-omp.o matriz-operacoes-threads.o matriz-operacoes.o matriz.o toolsv2.o main_matriz.c -o $@ $(LDFLAGS)
 
 gera_matriz2: matriz.o toolsv2.o gera_matriz2.c
 	$(CC) $(CCFLAGS) matriz.o toolsv2.o gera_matriz2.c -o $@ $(LDFLAGS)
+
 
 help:
 	@echo
