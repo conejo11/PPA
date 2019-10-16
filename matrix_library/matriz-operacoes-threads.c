@@ -20,6 +20,7 @@ void *multiplicaBlocoTh (void *ptr){
   for( i =args->bloco; i<args->divisor; i+=args->n_threads){
     multiplicar_submatriz(args->mat_a[i], args->mat_b[i], args->mat_c[i]);
   }
+  // printf("foi 1\n")
   return NULL;
 }
 
